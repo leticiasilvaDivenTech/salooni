@@ -8,7 +8,15 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Expanded(
-              child: Container(),
+              child: PageView.builder(
+                itemCount: 3,
+                itemBuilder: (_,currentIndex){
+                  return Container(
+                    color: currentIndex==1? Colors.grey: Colors.indigo,
+                  );
+                },
+
+              )
             ),
             _buildBullets()
           ],
