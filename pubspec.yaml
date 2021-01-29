@@ -47,7 +47,24 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  fonts:
+    - family: Generic
+      fonts:
+          - asset: fonts/Generica.otf
+            weight: 300
+    - family: SaniTrixieSans
+      fonts:
+        - asset: fonts/SaniTrixieSans.ttf
+          weight: 300
+
+  assets:
+      - images/icone1.png
+      - images/icone2.png
+      - images/icone3.png
+      - images/icone4.png
+      - images/icone5.png
+      - images/icone6.png
+      - images/icone7.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
