@@ -27,6 +27,7 @@ dependencies:
   intl: ^0.15.7
   curved_navigation_bar: ^0.3.7
   table_calendar: ^2.3.3
+  flutter_launcher_icons: ^0.8.0
 
 
   # The following adds the Cupertino Icons font to your application.
