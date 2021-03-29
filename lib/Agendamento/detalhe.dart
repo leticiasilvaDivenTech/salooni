@@ -7,6 +7,9 @@ class detalhe extends StatefulWidget {
 }
 
 class _detalheState extends State<detalhe> {
+  bool _checkValue1 = true;
+  bool _checkValue2 = true;
+
   @override
   Widget build(BuildContext context) {
     double _alturaTela = MediaQuery.of(context).size.height;
@@ -26,7 +29,7 @@ class _detalheState extends State<detalhe> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child:  Image.asset(
+                    child: Image.asset(
                       "images/roxo.png",
                       width: _LarguraTela * 0.08,
                       height: _alturaTela * 0.08,
@@ -48,47 +51,68 @@ class _detalheState extends State<detalhe> {
               ),
             ]),
             Padding(
-              padding: EdgeInsets.fromLTRB(_LarguraTela * 0.09,
-                  _alturaTela * 0.09, 0, 0),
-              child: ListTile(
-                leading: Icon(
-                  Icons.circle,
-                  size: 18,
-                  color: Color(0xFF9977ae),
-                ),
-                title: Text(
-                  'Alongamento',
-                  style: TextStyle(fontSize: 18),
-                ),
+              padding: EdgeInsets.fromLTRB(
+                  _LarguraTela * 0.09, _alturaTela * 0.09, 0, 0),
+              child: CheckboxListTile(
+                  // leading: Icon(
+                  //   Icons.circle,
+                  //   size: 18,
+                  //   color: Color(0xFF9977ae),
+                  // ),
+                  title: Text(
+                    'Alongamento',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  activeColor: Color(0xFF9977ae),
+                  checkColor: Color(0xFF9977ae),
+                  value: _checkValue1,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _checkValue1 = value;
+                    });
+                  }),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(_LarguraTela * 0.09, 0, 0, 0),
+              child: CheckboxListTile(
+                  // leading: Icon(
+                  //   Icons.circle,
+                  //   size: 18,
+                  //   color: Color(0xFF9977ae),
+                  // ),
+                  title: Text(
+                    'Alongamento',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  activeColor: Color(0xFF9977ae),
+                  checkColor: Color(0xFF9977ae),
+                  value: _checkValue2,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _checkValue2 = value;
+                    });
+                  }),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(_LarguraTela * 0.15, 30, 0, 0),
+              child: Text(
+                "Valor Total",
+                style: TextStyle(
+                    color: Color(0xFF9977ae),
+                    fontSize: 20,
+                    fontFamily: "Generic"),
+                textAlign: TextAlign.center,
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(
-                  _LarguraTela * 0.09, 0, 0, 0),
-              child: ListTile(
-                leading: Icon(
-                  Icons.circle,
-                  size: 18,
-                  color: Color(0xFF9977ae),
-                ),
-                title: Text(
-                  'Esmaltação',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                  _LarguraTela * 0.6, 0, 0, 0),
-              child: ListTile(
-                leading: Icon(
-                  Icons.monetization_on_rounded,
-                  color: Color(0xFF9977ae),
-                ),
-                title: Text(
-                  '160.00',
-                  style: TextStyle(fontSize: 20, color: Colors.red),
-                ),
+              padding: EdgeInsets.fromLTRB(_LarguraTela * 0.15, 0, 0, 0),
+              child: Text(
+                r'R$ 30,00',
+                style: TextStyle(
+                    color: Colors.black, fontSize: 12, fontFamily: "Generic", fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
             )
           ],

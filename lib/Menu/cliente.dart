@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salooni/Agendamento/detalhe.dart';
+import 'package:salooni/Cliente/registrar_cliente.dart';
 
 class cliente extends StatefulWidget {
   @override
@@ -130,7 +131,11 @@ class _clienteState extends State<cliente> {
               )
             ])),
         floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {  Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => RegistrarCliente()));
+            },
             tooltip: 'Increment Counter',
             backgroundColor: Color(0xFF88d1ce),
             child: Padding(
