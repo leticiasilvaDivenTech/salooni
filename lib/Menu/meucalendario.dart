@@ -55,7 +55,7 @@ class _MeuCalendarioState extends State<MeuCalendario> {
                       Row(children: <Widget>[
                         Padding(
                           padding: EdgeInsets.fromLTRB(
-                              _LarguraTela * 0.04,
+                              _LarguraTela * 0.03,
                               _alturaTela * 0.02,
                               _LarguraTela * 0.4,
                               _alturaTela * 0.02),
@@ -83,12 +83,15 @@ class _MeuCalendarioState extends State<MeuCalendario> {
                                   color: Color(0xFF7697ce),
                                   fontSize: _LarguraTela * 0.04)),
                         ),
+                        Expanded(
+                            child:
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 0, 0, _alturaTela * 0.02),
                           child: Text("Padrão",
                               style: TextStyle(
                                   color: Color(0xFF0f0f0f),
                                   fontSize: _LarguraTela * 0.04)),
+                        )
                         )
                       ]),
                       Row(children: <Widget>[

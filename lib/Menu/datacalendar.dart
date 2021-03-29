@@ -81,7 +81,7 @@ class _dataCalendarState extends State<dataCalendar> {
                     color: Color(0xFF7697ce),
                   ),
                   rightChevronIcon: Icon(
-                    Icons.chevron_left,
+                    Icons.chevron_right,
                     color: Color(0xFF7697ce),
                   ),
                 ),
@@ -133,6 +133,8 @@ class _dataCalendarState extends State<dataCalendar> {
                                           color: Color(0xFFededed),
                                           fontSize: _LarguraTela * 0.04)),
                                 ),
+                        Expanded(
+                            child:
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       0,
@@ -144,6 +146,7 @@ class _dataCalendarState extends State<dataCalendar> {
                                           color: Color(0xFF0f0f0f),
                                           fontSize: _LarguraTela * 0.04)),
                                 )
+                        )
                               ]),
                               Row(children: <Widget>[
                                 Padding(
@@ -157,6 +160,8 @@ class _dataCalendarState extends State<dataCalendar> {
                                           color: Color(0xFFededed),
                                           fontSize: _LarguraTela * 0.04)),
                                 ),
+                                Expanded(
+                                    child:
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       0,
@@ -167,6 +172,7 @@ class _dataCalendarState extends State<dataCalendar> {
                                       style: TextStyle(
                                           color: Color(0xFF0f0f0f),
                                           fontSize: _LarguraTela * 0.04)),
+                                )
                                 )
                               ]),
                               Row(children: <Widget>[
@@ -181,6 +187,7 @@ class _dataCalendarState extends State<dataCalendar> {
                                           color: Color(0xFFededed),
                                           fontSize: _LarguraTela * 0.04)),
                                 ),
+
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       _LarguraTela * 0.04,
@@ -192,11 +199,13 @@ class _dataCalendarState extends State<dataCalendar> {
                                           color: Color(0xFF0f0f0f),
                                           fontSize: _LarguraTela * 0.04)),
                                 ),
+                                Expanded(
+                                    child:
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       _LarguraTela * 0.04,
                                       _alturaTela * 0.01,
-                                      0,
+                                      _LarguraTela * 0.04,
                                       _alturaTela * 0.02),
                                   child: Container(
                                     height: _alturaTela * 0.04,
@@ -207,6 +216,7 @@ class _dataCalendarState extends State<dataCalendar> {
                                             MaterialPageRoute(
                                                 builder: (context) => detalhe()));
                                       },
+
                                       child: Text(
                                         "Detalhes",
                                         style: TextStyle(
@@ -223,14 +233,16 @@ class _dataCalendarState extends State<dataCalendar> {
                                     ),
                                   ),
                                 )
+                                )
                               ]),
                             ],
                           )
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              _LarguraTela * 0.6, _alturaTela * 0.01, 0, 0),
-                          child: FlatButton(
+        SizedBox(
+          height: _alturaTela*0.09,
+          child: Column(
+              children: <Widget>[
+                       FlatButton(
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) => ProcedimentoDia()));
@@ -246,7 +258,9 @@ class _dataCalendarState extends State<dataCalendar> {
                               textAlign: TextAlign.center,
                             ),
                           ),
+              ])
                         ),
+
                       ],
                     )
                   ],

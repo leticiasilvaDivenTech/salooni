@@ -83,6 +83,8 @@ class _historicoState extends State<historico> {
                               color: Color(0xFF7697ce),
                               fontSize: _LarguraTela * 0.04)),
                     ),
+                    Expanded(
+                        child:
                     Padding(
                       padding: EdgeInsets.fromLTRB(_LarguraTela * 0.06, 0, 0, _alturaTela * 0.02),
                       child: Text("21 Nov.2021",
@@ -90,11 +92,14 @@ class _historicoState extends State<historico> {
                               color: Color(0xFF0f0f0f),
                               fontSize: _LarguraTela * 0.04)),
                     )
+                    )
                   ]),
                   Row(children: <Widget>[
+                    Expanded(
+                        child:
                     Padding(
                       padding: EdgeInsets.fromLTRB(_LarguraTela * 0.55,
-                          _alturaTela * 0.01, 0, _alturaTela * 0.02),
+                          _alturaTela * 0.01, _LarguraTela * 0.09, _alturaTela * 0.02),
                       child: Container(
                         height: _alturaTela * 0.04,
                         child: RaisedButton(
@@ -110,6 +115,7 @@ class _historicoState extends State<historico> {
                               side: BorderSide(color: Color(0xFF88d1ce))),
                           color: Color(0xFFededed),
                         ),
+                      ),
                       ),
                     )
                   ]),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 
@@ -87,12 +88,9 @@ class _parceirocadState extends State<parceirocad> {
                       style: TextStyle(color: Color(0xFF0f0f0f),
                           fontSize:_LarguraTela * 0.04),
                       controller: nparceiroController,
-                      validator: (value) {
-                        if (value.isEmpty)
-                          return "Insira o procedimento";
-                        else
-                          return null;
-                      }
+                      validator: PatternValidator('^[a-zA-Z]+\$',
+                          errorText: 'O Nome não pode ter caracter'
+                              ' especial ou números')
 
                   ),
                 ),
@@ -112,12 +110,7 @@ class _parceirocadState extends State<parceirocad> {
                       style: TextStyle(color: Color(0xFF0f0f0f),
                           fontSize: _LarguraTela * 0.04),
                       controller: emailController,
-                      validator: (value) {
-                        if (value.isEmpty)
-                          return "Insira o procedimento";
-                        else
-                          return null;
-                      }
+                    validator:EmailValidator(errorText: 'Inserir e-mail válido'),
                   ),
                 ),
                 Padding(
@@ -165,37 +158,45 @@ class _parceirocadState extends State<parceirocad> {
 
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB
-                    (_LarguraTela*0.09,_alturaTela*0.03,_LarguraTela*0.09,0),
-                  child: DropdownButton<String>(
-                    value: dropdownValue,
+                SizedBox(
+                    height: _alturaTela*0.09,
+                    child: Column(
+                      children: <Widget>[
+                        DropdownButton<String>(
+                          value: dropdownValue,
+                          style: TextStyle(color: Color(0xFF9977ae)),
+                          underline: Container(
+                            height: 3,
+                            color: Color(0xFF9977ae),
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdownValue = newValue;
+                            });
+                          },
+                          items: <String>[
+                            'Selecione o procedimento realizado',
+                            'Manicure',
+                            'Desgner de sobrançelha'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                                value: value,
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(_LarguraTela * 0.1,
+                                      _alturaTela * 0, _LarguraTela * 0.09, 0),
+                                  child: Text(
+                                    value,
+                                    style: TextStyle(
+                                      color: Color(0xFF9977ae),
+                                      fontSize: _LarguraTela * 0.04,
+                                    ),
+                                  ),
+                                ));
+                          }).toList(),
+                        ),
 
-                    style: TextStyle(color: Color(0xFF9977ae)),
-                    underline: Container(
-                      height: 3,
-                      color: Color(0xFF9977ae),
-                    ),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        dropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['Selecione o procedimento realizado',
-                      'Manicure','Desgner de sobrançelha']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                          value: value,
-                          child:Padding(
-                            padding: EdgeInsets.fromLTRB
-                              (_LarguraTela*0.1,_alturaTela*0,_LarguraTela*0.09,0),
-                            child: Text(value, style: TextStyle(color: Color(0xFF9977ae),
-                              fontSize: _LarguraTela * 0.04, ), ),
-                          )
-                      );
-                    }).toList(),
-                  ),
-                ),
+                      ],
+                    )),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, _alturaTela * 0.09, 0, 0),
                   child: Container(

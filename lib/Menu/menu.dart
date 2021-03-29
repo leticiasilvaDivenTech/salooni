@@ -80,6 +80,8 @@ class _MenuState extends State<Menu> {
                               color: Color(0xFF9977ae),
                               fontSize: _LarguraTela * 0.04)),
                     ),
+                  Expanded(
+                    child:
                     Padding(
                       padding: EdgeInsets.fromLTRB(
                           0, _alturaTela * 0.02, 0, _alturaTela * 0.02),
@@ -88,8 +90,10 @@ class _MenuState extends State<Menu> {
                               color: Color(0xFF0f0f0f),
                               fontSize: _LarguraTela * 0.04)),
                     )
+                  )
                   ]),
                   Row(children: <Widget>[
+
                     Padding(
                       padding: EdgeInsets.fromLTRB(
                           _LarguraTela * 0.04,
@@ -100,7 +104,11 @@ class _MenuState extends State<Menu> {
                           style: TextStyle(
                               color: Color(0xFF9977ae),
                               fontSize: _LarguraTela * 0.04)),
+
                     ),
+
+                    Expanded(
+                    child:
                     Padding(
                       padding: EdgeInsets.fromLTRB(
                           0, _alturaTela * 0.01, 0, _alturaTela * 0.02),
@@ -108,6 +116,7 @@ class _MenuState extends State<Menu> {
                           style: TextStyle(
                               color: Color(0xFF0f0f0f),
                               fontSize: _LarguraTela * 0.04)),
+                    )
                     )
                   ]),
                   Row(children: <Widget>[
@@ -130,9 +139,11 @@ class _MenuState extends State<Menu> {
                               color: Color(0xFF0f0f0f),
                               fontSize: _LarguraTela * 0.04)),
                     ),
+                    Expanded(
+                        child:
                     Padding(
                       padding: EdgeInsets.fromLTRB(_LarguraTela * 0.04,
-                          _alturaTela * 0.01, 0, _alturaTela * 0.02),
+                          _alturaTela * 0.01, _LarguraTela * 0.04, _alturaTela * 0.02),
                       child: Container(
                         height: _alturaTela * 0.04,
                         child: RaisedButton(
@@ -154,6 +165,7 @@ class _MenuState extends State<Menu> {
                           color: Color(0xFFededed),
                           //color: Color(0xFF9977ae),
                         ),
+                      ),
                       ),
                     )
                   ]),
