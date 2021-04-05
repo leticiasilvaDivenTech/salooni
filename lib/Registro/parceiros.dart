@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:salooni/Menu/menu.dart';
+import 'package:salooni/Menu/menuLateral.dart';
 
 class Parceiro extends StatefulWidget {
   @override
@@ -223,10 +224,9 @@ class _ParceiroState extends State<Parceiro> {
                     height: _alturaTela * 0.055,
                     child: RaisedButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Menu()));
-                        }
+                              MaterialPageRoute(builder: (context) => MenuLateral()));
+
                       },
                       child: Text(
                         "Concluir",
