@@ -11,7 +11,7 @@ class Cliente {
   String CPF;
   String Telefone;
   String Telefone2;
-  DateTime Aniversario;
+  String Aniversario;
 
 
   Cliente({
