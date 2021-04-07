@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class EsqueceuSenha extends StatefulWidget {
   @override
@@ -70,12 +71,7 @@ class _EsqueceuSenhaState extends State<EsqueceuSenha> {
                         color: Color(0xFF0f0f0f),
                         fontSize: _LarguraTela * 0.05,
                         fontFamily: "SaniTrixieSans"),
-                      validator: (value) {
-                        if (value.isEmpty)
-                          return "Insira o e-mail!";
-                        else
-                          return null;
-                      }
+                      validator: EmailValidator(errorText: 'Inserir e-mail válido')
                   ),
                 ),
 

@@ -105,8 +105,8 @@ class _financeiroState extends State<financeiro> {
                     padding: EdgeInsets.fromLTRB(0, 0, _LarguraTela * 0.05, 0),
                     child: RaisedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => detalhe()));
+                      /*  Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => detalhe()));*/
                       },
                       child: Text(
                         "Data",

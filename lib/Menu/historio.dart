@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'historicocadastrado.dart';
+
 class historico extends StatefulWidget {
   @override
   _historicoState createState() => _historicoState();
@@ -103,7 +105,10 @@ class _historicoState extends State<historico> {
                       child: Container(
                         height: _alturaTela * 0.04,
                         child: RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => historiodetalhes()));
+                          },
                           child: Text(
                             "Detalhes",
                             style: TextStyle(

@@ -28,6 +28,7 @@ dependencies:
   curved_navigation_bar: ^0.3.7
   table_calendar: ^2.3.3
   flutter_launcher_icons: ^0.8.0
+  form_field_validator: ^1.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -37,8 +38,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  integration_test:
-    sdk: flutter
+  # integration_test:
+  #  sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -55,42 +56,42 @@ flutter:
   fonts:
     - family: Generic
       fonts:
-          - asset: fonts/Generica.otf
-            weight: 300
+        - asset: fonts/Generica.otf
+          weight: 300
     - family: SaniTrixieSans
       fonts:
         - asset: fonts/SaniTrixieSans.ttf
           weight: 300
 
   assets:
-      - images/icone1.png
-      - images/icone2.png
-      - images/icone3.png
-      - images/icone4.png
-      - images/icone5.png
-      - images/icone6.png
-      - images/icone7.png
-      - images/icone9.png
-      - images/icone10.png
-      - images/icone_Parceiro.png
-      - images/icone_Proprietario.png
-      - images/icone_Tela2.png
-      - images/icone_Tela3.png
-      - images/icone11.png
-      - images/Tela1M.png
-      - images/Tela2M.png
-      - images/Tela3M.png
-      - images/Calendario.png
-      - images/Clientes.png
-      - images/Historico.png
-      - images/Parceiros.png
-      - images/Relogio.png
-      - images/roxo.png
-      - images/azulescuro.png
-      - images/azul.png
-      - images/verde.png
-      - images/verdeclaro.png
-      - images/Procedimentos.png
+    - images/icone1.png
+    - images/icone2.png
+    - images/icone3.png
+    - images/icone4.png
+    - images/icone5.png
+    - images/icone6.png
+    - images/icone7.png
+    - images/icone9.png
+    - images/icone10.png
+    - images/icone_Parceiro.png
+    - images/icone_Proprietario.png
+    - images/icone_Tela2.png
+    - images/icone_Tela3.png
+    - images/icone11.png
+    - images/Tela1M.png
+    - images/Tela2M.png
+    - images/Tela3M.png
+    - images/Calendario.png
+    - images/Clientes.png
+    - images/Historico.png
+    - images/Parceiros.png
+    - images/Relogio.png
+    - images/roxo.png
+    - images/azulescuro.png
+    - images/azul.png
+    - images/verde.png
+    - images/verdeclaro.png
+    - images/Procedimentos.png
   #
 
   # An image asset can refer to one or more resolution-specific "variants", see

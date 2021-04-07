@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:salooni/Menu/menu.dart';
+import 'package:salooni/Menu/menuLateral.dart';
 import 'package:salooni/Menu/navbar.dart';
 import 'package:salooni/Registro/registrar.dart';
-
+import 'package:form_field_validator/form_field_validator.dart';
 import 'esqueceu_senha.dart';
 
 class LoginUser extends StatefulWidget {
@@ -60,18 +60,11 @@ class _LoginUserState extends State<LoginUser> {
                         hintStyle: TextStyle(color: Color(0xFF9977ae)),
                         labelStyle: TextStyle(color: Color(0xFF9977ae))),
                     controller: loginController,
-
-                    //textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Color(0xFF0f0f0f),
                         fontSize: _LarguraTela * 0.04),
-                    validator: (value) {
-                      if (value.isEmpty)
-                        return "Insira o seu Login";
-                      else
-                        return null;
-                    },
-                  ),
+                      validator:
+                          EmailValidator(errorText: 'Inserir e-mail válido')),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(
@@ -129,7 +122,7 @@ class _LoginUserState extends State<LoginUser> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BottomNavBar()));
+                                  builder: (context) => MenuLateral()));
                         }
                         else
                           return null;

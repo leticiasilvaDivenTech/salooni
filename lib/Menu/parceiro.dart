@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:salooni/Agendamento/detalhe.dart';
 import 'package:salooni/Menu/parceirocad.dart';
 
+import 'ParceirosCadastrados.dart';
+
 class parceiros extends StatefulWidget {
   @override
   _parceirosState createState() => _parceirosState();
@@ -131,7 +133,7 @@ class _parceirosState extends State<parceiros> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => detalhe()));
+                                      builder: (context) => parceirocadastrados()));
                             },
                             child: Text(
                               "Detalhes",

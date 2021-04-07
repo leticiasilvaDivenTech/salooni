@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:salooni/Menu/menu.dart';
+import 'package:salooni/Menu/menuLateral.dart';
 
 
 class Parceiro extends StatefulWidget {
@@ -215,42 +216,33 @@ class _ParceiroState extends State<Parceiro> {
             ),
 
             Padding(
-              padding: EdgeInsets.fromLTRB(0,_alturaTela*0.04,0,0),
-
+              padding: EdgeInsets.fromLTRB(0, _alturaTela * 0.04, 0, 0),
               child: Container(
-                margin: EdgeInsets.fromLTRB
-                  (_LarguraTela*0.5,0,_LarguraTela*0.02,0),
-                height: _alturaTela*0.055,
+                margin: EdgeInsets.fromLTRB(
+                    _LarguraTela * 0.5, 0, _LarguraTela * 0.02, 0),
+                height: _alturaTela * 0.055,
                 child: RaisedButton(
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Menu())
-                      );
-                    }
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MenuLateral()));
 
                   },
                   child: Text(
                     "Concluir",
-                    style: TextStyle(color: Color(0xFFededed),
-                        fontSize:_LarguraTela*0.061),
+                    style: TextStyle(
+                        color: Color(0xFFededed),
+                        fontSize: _LarguraTela * 0.061),
                   ),
-                  shape:  RoundedRectangleBorder(
+                  shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
-                      side: BorderSide(color: Color(0xFFededed))
-                  ),
+                      side: BorderSide(color: Color(0xFFededed))),
                   color: Color(0xFF9977ae),
                 ),
               ),
             ),
-
-
           ],
-
         ),
-      ),
-      )
-    );
+        ),
+      ));
   }
 }

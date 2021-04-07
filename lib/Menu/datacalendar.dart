@@ -40,17 +40,35 @@ class _dataCalendarState extends State<dataCalendar> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, _alturaTela * 0.09, 0, 0),
-                child: Text(
-                  "Calendário",
-                  style: TextStyle(
-                      color: Color(0xFF7697ce),
-                      fontSize: _alturaTela * 0.04,
-                      fontFamily: "Generic"),
-                  textAlign: TextAlign.center,
+              Row(children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      _LarguraTela * 0.03, _alturaTela * 0.09, 0, 0),
+                  child: FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child:  Image.asset(
+                        "images/azul.png",
+                        width: _LarguraTela * 0.08,
+                        height: _alturaTela * 0.08,
+                      )),
                 ),
-              ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        0, _alturaTela * 0.1, _LarguraTela * 0.2, 0),
+                    child:  Text(
+                      "Calendário",
+                      style: TextStyle(
+                          color: Color(0xFF7697ce),
+                          fontSize: _alturaTela * 0.04,
+                          fontFamily: "Generic"),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ]),
               SizedBox(
                 height: 30,
               ),
