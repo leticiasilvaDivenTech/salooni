@@ -7,7 +7,7 @@ String procedimentoToJson(List<Procedimento> data) => json.encode(List<dynamic>.
 
 class Procedimento {
   String objectId;
-  Funcionario IdFuncFK;
+  Object IdFuncFK;
   int Valor;
   String Nome;
   int Tempo;

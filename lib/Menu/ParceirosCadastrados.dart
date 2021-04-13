@@ -1,9 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:http/http.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:salooni/Models/funcionario.dart';
+import 'package:salooni/Services/funcionario_service.dart';
 
 
 class parceirocadastrados extends StatefulWidget {
+  parceirocadastrados({this.parceiroId});
+  String parceiroId;
+
   @override
   _parceirocadastradosState createState() => _parceirocadastradosState();
 }
@@ -29,6 +38,32 @@ class _parceirocadastradosState extends State<parceirocadastrados> {
       _formKey = GlobalKey<FormState>();
     });
   }
+
+
+  initState(){
+    carregarParceiros(this.widget.parceiroId);
+  }
+
+  Future<void> carregarParceiros(String parceiroId) async{
+    QueryBuilder<ParseObject> queryParceiro =
+    QueryBuilder<ParseObject>(ParseObject('Usuario'));
+    queryParceiro.includeObject(['IdFuncFK']);
+
+    final ParseResponse apiResponse = await queryParceiro.query();
+
+    if (apiResponse.success && apiResponse.results != null) {
+      final objParceiro = apiResponse.results.first as ParseObject;
+
+      nparceiroController.text = objParceiro.get<ParseObject>('IdFuncFK').get<String>('Nome');
+      cnpjController.text = objParceiro.get<ParseObject>('IdFuncFK').get<String>('CNPJ');
+      celularController.text = objParceiro.get<ParseObject>('IdFuncFK').get<String>('Telefone');
+      emailController.text = objParceiro.get<String>('Email');
+
+    } else {
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double _alturaTela = MediaQuery.of(context).size.height;
