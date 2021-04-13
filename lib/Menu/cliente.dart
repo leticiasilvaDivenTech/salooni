@@ -37,9 +37,6 @@ class _clienteState extends State<cliente> {
     return clienteList;
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     double _alturaTela = MediaQuery.of(context).size.height;
