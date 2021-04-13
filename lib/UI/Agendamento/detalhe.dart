@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salooni/Menu/navbar.dart';
+import 'package:salooni/UI//Menu/navbar.dart';
 
 class detalhe extends StatefulWidget {
   @override

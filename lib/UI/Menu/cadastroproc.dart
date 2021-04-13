@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:salooni/Registro/parceiros.dart';
+import 'package:salooni/UI//Registro/parceiros.dart';
 
-import 'cadastroproc.dart';
-
-class ProcedimentoEdi extends StatefulWidget {
+class cadastroProc extends StatefulWidget {
   @override
-  _ProcedimentoEdiState createState() => _ProcedimentoEdiState();
+  _cadastroProcState createState() => _cadastroProcState();
 }
 
-class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
+class _cadastroProcState extends State<cadastroProc> {
   var maskFormatterHora = new MaskTextInputFormatter(
       mask: '##:##', filter: {"#": RegExp(r'[0-9]')});
   TextEditingController procedimentoController = TextEditingController();
@@ -31,14 +29,8 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
 
   @override
   Widget build(BuildContext context) {
-    double _alturaTela = MediaQuery
-        .of(context)
-        .size
-        .height;
-    double _LarguraTela = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double _alturaTela = MediaQuery.of(context).size.height;
+    double _LarguraTela = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color(0xFFededed),
       body: SingleChildScrollView(
@@ -49,24 +41,25 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
             children: <Widget>[
               Row(children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      _LarguraTela * 0.03, _alturaTela * 0.09, 0, 0),
-                  child: FlatButton(
+                    padding: EdgeInsets.fromLTRB(
+                        _LarguraTela * 0.03, _alturaTela * 0.09, 0, 0),
+                    child: FlatButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Image.asset(
-                        "images/roxo.png",
+                      child:  Image.asset(
+                        "images/azul.png",
                         width: _LarguraTela * 0.08,
                         height: _alturaTela * 0.08,
-                      )),
-                ),
+
+                      ),
+                    )),
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        0, _alturaTela * 0.09, _LarguraTela * 0.19, 0),
+
+                  child:   Padding(
+                    padding: EdgeInsets.fromLTRB(0, _alturaTela * 0.09, _LarguraTela*0.11, 0),
                     child: Text(
-                      "Editar ou Excluir Procedimentos",
+                      "Cadastro de Procedimentos",
                       style: TextStyle(
                           color: Color(0xFF9977ae),
                           fontSize: _alturaTela * 0.04,
@@ -76,7 +69,6 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                   ),
                 ),
               ]),
-
               Padding(
                 padding: EdgeInsets.fromLTRB(_LarguraTela * 0.09,
                     _alturaTela * 0.03, _LarguraTela * 0.09, 0),
@@ -170,41 +162,35 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                             _value1 = value;
                           });
                         })),
-                new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding:
-                        EdgeInsets.fromLTRB(_LarguraTela * 0.05, 0, 0, 0),
-                        child: new Radio(
-                          value: 1,
-                          groupValue: null,
-                          onChanged: null,
+                new Row(mainAxisAlignment: MainAxisAlignment.center, children: <
+                    Widget>[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(_LarguraTela * 0.05, 0, 0, 0),
+                    child: new Radio(
+                      value: 1,
+                      groupValue: null,
+                      onChanged: null,
+                    ),
+                  ),
+                  Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, _LarguraTela * 0.5, 0),
+                        child: TextField(
+                          autofocus: false,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Color(0xFF9977ae))),
+                              hintText: "% (Porcentagem)",
+                              hintStyle: TextStyle(color: Color(0xFF9977ae)),
+                              labelStyle: TextStyle(color: Color(0xFF9977ae))),
+                          style: TextStyle(
+                              color: Color(0xFF0f0f0f),
+                              fontSize: _LarguraTela * 0.04),
+                          // controller: precoController,
                         ),
-                      ),
-                      Expanded(
-                          child: Padding(
-                            padding:
-                            EdgeInsets.fromLTRB(0, 0, _LarguraTela * 0.5, 0),
-                            child: TextField(
-                              autofocus: false,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide:
-                                      BorderSide(color: Color(0xFF9977ae))),
-                                  hintText: "% (Porcentagem)",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9977ae)),
-                                  labelStyle:
-                                  TextStyle(color: Color(0xFF9977ae))),
-                              style: TextStyle(
-                                  color: Color(0xFF0f0f0f),
-                                  fontSize: _LarguraTela * 0.04),
-                              // controller: precoController,
-                            ),
-                          )),
-                    ]),
+                      )),
+                ]),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -229,10 +215,8 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                                       borderSide:
                                       BorderSide(color: Color(0xFF9977ae))),
                                   hintText: "R\$ (Valor fixo)",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9977ae)),
-                                  labelStyle:
-                                  TextStyle(color: Color(0xFF9977ae))),
+                                  hintStyle: TextStyle(color: Color(0xFF9977ae)),
+                                  labelStyle: TextStyle(color: Color(0xFF9977ae))),
                               style: TextStyle(
                                   color: Color(0xFF0f0f0f),
                                   fontSize: _LarguraTela * 0.04),
@@ -241,54 +225,36 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                           )),
                     ]),
               ]),
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, _alturaTela * 0.1, 0, 0),
-                    child: Container(
-                      height: _alturaTela * 0.055,
-                      padding: EdgeInsets.only(right: _LarguraTela * 0.08),
-                      margin: EdgeInsets.only(left: _LarguraTela * 0.15),
-                      child: RaisedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "   Excluir   ",
-                          style: TextStyle(
-                              color: Color(0xFFededed),
-                              fontSize: _LarguraTela * 0.061),
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                            side: BorderSide(color: Color(0xFFededed))),
-                        color: Color(0xFF9977ae),
-                      ),
+
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, _alturaTela * 0.05, 0, 0),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(
+                      _LarguraTela * 0.5, 0, _LarguraTela * 0.02, 0),
+                  height: _alturaTela * 0.055,
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Parceiro()));
+                    },
+                    child: Text(
+                      "Salvar",
+                      style: TextStyle(
+                          color: Color(0xFFededed),
+                          fontSize: _LarguraTela * 0.061),
                     ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                        side: BorderSide(color: Color(0xFFededed))),
+                    color: Color(0xFF9977ae),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, _alturaTela * 0.1, 0, 0),
-                    child: Container(
-                      height: _alturaTela * 0.055,
-                      child: RaisedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "   Salvar   ",
-                          style: TextStyle(
-                              color: Color(0xFFededed),
-                              fontSize: _LarguraTela * 0.061),
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                            side: BorderSide(color: Color(0xFFededed))),
-                        color: Color(0xFF9977ae),
-                      ),
-                    ),
-                  ),
-                ],
-              )
+                ),
+              ),
             ],
           ),
         ),
       ),
+
     );
   }
 }

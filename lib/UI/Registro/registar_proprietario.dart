@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:salooni/Registro/procedimento.dart';
+import 'package:salooni/UI/Registro/procedimento.dart';
 
 
 class RegistrarProprietario extends StatefulWidget {

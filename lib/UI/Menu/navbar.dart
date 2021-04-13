@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:salooni/Menu/calendario.dart';
-import 'package:salooni/Menu/cliente.dart';
-import 'package:salooni/Menu/historio.dart';
-import 'package:salooni/Menu/parceiro.dart';
-import 'package:salooni/Menu/procedimentosCadastrados.dart';
+import 'package:salooni/UI//Menu/calendario.dart';
+import 'package:salooni/UI//Menu/cliente.dart';
+import 'package:salooni/UI//Menu/historio.dart';
+import 'package:salooni/UI//Menu/parceiro.dart';
+import 'package:salooni/UI//Menu/procedimentosCadastrados.dart';
 
 import 'menu.dart';
 

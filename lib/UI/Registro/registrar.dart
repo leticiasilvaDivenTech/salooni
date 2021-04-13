@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:salooni/Registro/registar_proprietario.dart';
-import 'package:salooni/Registro/registrar_parceiro.dart';
-
+import 'package:salooni/UI/Registro/registar_proprietario.dart';
+import 'package:salooni/UI/Registro/registrar_parceiro.dart';
 
 class Registrar extends StatelessWidget {
   @override

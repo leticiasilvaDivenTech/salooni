@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salooni/Menu/procedimento.dart';
-
+import 'package:salooni/UI//Menu/procedimento.dart';
 import 'cadastroproc.dart';
 
 class ProdedimentoCad extends StatefulWidget {

@@ -1,13 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:salooni/Menu/cliente.dart';
-import 'package:salooni/Menu/datacalendar.dart';
-import 'package:salooni/Menu/financeiro.dart';
-import 'package:salooni/Menu/historio.dart';
-import 'package:salooni/Menu/manutencao.dart';
-import 'package:salooni/Menu/parceiro.dart';
-import 'package:salooni/Menu/procedimentosCadastrados.dart';
+import 'package:salooni/UI//Menu/cliente.dart';
+import 'package:salooni/UI//Menu/financeiro.dart';
+import 'package:salooni/UI//Menu/historio.dart';
+import 'package:salooni/UI//Menu/manutencao.dart';
+import 'package:salooni/UI//Menu/parceiro.dart';
+import 'package:salooni/UI//Menu/procedimentosCadastrados.dart';
 
 import 'calendario.dart';
 import 'menu.dart';

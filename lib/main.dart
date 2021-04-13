@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'Inicial/home_page.dart';
+import 'UI/Inicial/home_page.dart';
+import 'UI/Menu/menuLateral.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: HomePage(),
+    home: MenuLateral()
+    //HomePage(),
   ));
 }

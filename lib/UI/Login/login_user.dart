@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:salooni/Menu/menuLateral.dart';
-import 'package:salooni/Menu/navbar.dart';
-import 'package:salooni/Registro/registrar.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:salooni/UI/Menu/menuLateral.dart';
+import 'package:salooni/UI/Registro/registrar.dart';
 import 'esqueceu_senha.dart';
 
 class LoginUser extends StatefulWidget {

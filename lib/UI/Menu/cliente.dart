@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:salooni/Agendamento/detalhe.dart';
-import 'package:salooni/Cliente/registrar_cliente.dart';
+import 'package:salooni/UI//Agendamento/detalhe.dart';
+import 'package:salooni/UI//Cliente/registrar_cliente.dart';
 import 'package:salooni/Models/cliente.dart';
 import 'package:salooni/Services/cliente_service.dart';
 
@@ -18,8 +18,6 @@ class _clienteState extends State<cliente> {
     List<Cliente> clienteList = [];
 
     Response response = await ClienteService.carregarClientes();
-    // print("Code is ${response.statusCode}");
-    // print("Response is ${response.body}");
 
     if (response.statusCode == 200) {
 
@@ -50,7 +48,6 @@ class _clienteState extends State<cliente> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  //Tab(icon: new Image.asset("images/icone7.png")),
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, _alturaTela * 0.09, 0, 0),
                     child: Text(
@@ -84,7 +81,8 @@ class _clienteState extends State<cliente> {
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.all(10),
-                      child:  FutureBuilder(builder: (context, snapshot) {
+                      child:  FutureBuilder(
+                        builder: (context, snapshot) {
                         if (snapshot.data != null) {
                           List<Cliente> clienteList = snapshot.data;
 

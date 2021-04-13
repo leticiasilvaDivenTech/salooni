@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:salooni/Menu/menu.dart';
-import 'package:salooni/Menu/menuLateral.dart';
+import 'package:salooni/UI/Menu/menuLateral.dart';
 
 
 class Parceiro extends StatefulWidget {

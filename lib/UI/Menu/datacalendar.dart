@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:salooni/Agendamento/detalhe.dart';
-import 'package:salooni/Calendario/ProcedimentoDia.dart';
+import 'package:salooni/UI//Agendamento/detalhe.dart';
+import 'package:salooni/UI//Calendario/ProcedimentoDia.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class dataCalendar extends StatefulWidget {

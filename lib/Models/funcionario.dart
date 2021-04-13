@@ -11,6 +11,7 @@ class Funcionario {
   String TipoFunc;
   String Telefone;
   String Telefone2;
+  String Nome;
 
 
   Funcionario({
@@ -18,7 +19,8 @@ class Funcionario {
     this.IdSalaoFK,
     this.TipoFunc,
     this.Telefone,
-    this.Telefone2
+    this.Telefone2,
+    this.Nome
   });
 
   factory Funcionario.fromJson(Map<String, dynamic> json) => Funcionario(
@@ -27,6 +29,7 @@ class Funcionario {
     TipoFunc: json["TipoFunc"],
     Telefone: json["Telefone"],
     Telefone2: json["Telefone2"],
+    Nome: json["Nome"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -35,5 +38,6 @@ class Funcionario {
     "TipoFunc": TipoFunc,
     "Telefone": Telefone,
     "Telefone2": Telefone2,
+    "Nome": Nome
   };
 }

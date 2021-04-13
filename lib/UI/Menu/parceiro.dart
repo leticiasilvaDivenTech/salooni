@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salooni/Agendamento/detalhe.dart';
-import 'package:salooni/Menu/parceirocad.dart';
+import 'package:salooni/UI//Menu/parceirocad.dart';
 
 import 'ParceirosCadastrados.dart';
 

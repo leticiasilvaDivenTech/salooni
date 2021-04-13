@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salooni/Login/login_user.dart';
-
+import 'package:salooni/UI/Login/login_user.dart';
 class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
