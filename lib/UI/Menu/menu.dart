@@ -117,7 +117,7 @@ class _MenuState extends State<Menu> {
                                         0,
                                         _alturaTela * 0.02),
                                     child: Text(
-                                        AgendamentoList[index].IdClienteFK.Nome,
+                                        "AgendamentoList[index].IdClienteFK",
                                         style: TextStyle(
                                             color: Color(0xFF0f0f0f),
                                             fontSize: _LarguraTela * 0.04)),
@@ -142,7 +142,7 @@ class _MenuState extends State<Menu> {
                                         0,
                                         _alturaTela * 0.02),
                                     child: Text(
-                                        AgendamentoList[index].IdFuncFK.Nome,
+                                        "AgendamentoList[index].IdFuncFK",
                                         style: TextStyle(
                                             color: Color(0xFF0f0f0f),
                                             fontSize: _LarguraTela * 0.04)),

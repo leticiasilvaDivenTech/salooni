@@ -10,8 +10,8 @@ String agendamentoToJson(List<Agendamento> data) => json.encode(List<dynamic>.fr
 class Agendamento {
   String objectId;
   Object IdClienteFK;
-  Funcionario IdFuncFK;
-  Procedimento IdProcFK;
+  Object IdFuncFK;
+  Object IdProcFK;
   String Observacao;
   String DataAgendamento;
 
