@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'cliente.dart';
 import 'procedimento.dart';
 import 'funcionario.dart';
@@ -9,11 +10,11 @@ String agendamentoToJson(List<Agendamento> data) => json.encode(List<dynamic>.fr
 
 class Agendamento {
   String objectId;
-  Object IdClienteFK;
-  Object IdFuncFK;
-  Object IdProcFK;
+  Cliente IdClienteFK;
+  Funcionario IdFuncFK;
+  Procedimento IdProcFK;
   String Observacao;
-  String DataAgendamento;
+  DateTime DataAgendamento;
 
 
   Agendamento({

@@ -1,30 +1,33 @@
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
-import 'package:salooni/Models/cliente.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:salooni/Models/funcionario.dart';
 import 'package:salooni/config.dart';
 
 
-class ClienteService {
+
+class FuncionarioService {
 
   static final String _baseUrl = "https://parseapi.back4app.com/classes/";
-  static final String apiUrl = _baseUrl + "Cliente";
+  static final String apiUrl = _baseUrl + "Funcionario";
 
-  static Future<Response> adicionarCliente(Cliente cliente) async{
+  static Future<Response> adicionarFuncionario(Funcionario funcionario) async{
     Response response = await post(apiUrl,
       headers: {
         'X-Parse-Application-Id' : kParseApplicationId,
         'X-Parse-REST-API-Key' : kParseRestApiKey,
         'Content-Type' : 'application/json'
       },
-      body: json.encode(cliente.toJson()),
+      body: json.encode(funcionario.toJson()),
     );
 
     return response;
   }
 
 
-  static Future carregarClientes() async{
+  static Future carregarFuncionarios() async{
     Response response = await get(apiUrl, headers: {
       'X-Parse-Application-Id' : kParseApplicationId,
       'X-Parse-REST-API-Key' : kParseRestApiKey,
@@ -34,25 +37,25 @@ class ClienteService {
   }
 
 
-  static Future atualizarCliente(Cliente cliente) async{
+  static Future atualizarFuncionario(Funcionario funcionario) async{
 
-    String apiUrl = _baseUrl + "Cliente/${cliente.objectId}";
+    String apiUrl = _baseUrl + "Funcionario/${funcionario.objectId}";
 
     Response response = await put(apiUrl, headers: {
       'X-Parse-Application-Id' : kParseApplicationId,
       'X-Parse-REST-API-Key' : kParseRestApiKey,
       'Content-Type' : 'application/json',
     },
-        body: json.encode(cliente.toJson())
+        body: json.encode(funcionario.toJson())
     );
 
     return response;
   }
 
 
-  static Future deletarCliente(String objectId) async{
+  static Future deletarFuncionario(String objectId) async{
 
-    String apiUrl = _baseUrl + "Cliente/$objectId";
+    String apiUrl = _baseUrl + "Funcionario/$objectId";
 
     Response response = await delete(apiUrl, headers: {
       'X-Parse-Application-Id' : kParseApplicationId,
@@ -61,4 +64,14 @@ class ClienteService {
 
     return response;
   }
+
+  static Future carregarParceiros() async{
+    Response response = await get(apiUrl, headers: {
+      'X-Parse-Application-Id' : kParseApplicationId,
+      'X-Parse-REST-API-Key' : kParseRestApiKey,
+    });
+
+    return response;
+  }
+
 }

@@ -5,13 +5,20 @@ List<Funcionario> funcionarioFromJson(String str) => List<Funcionario>.from(json
 
 String funcionarioToJson(List<Funcionario> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+enum TipoFuncionario {
+  PRC, //Parceiro
+  DNO //Dono
+}
+
+
 class Funcionario {
   String objectId;
-  Salao IdSalaoFK;
+  Object IdSalaoFK;
   String TipoFunc;
   String Telefone;
   String Telefone2;
   String Nome;
+  String CNPJ;
 
 
   Funcionario({
@@ -20,7 +27,8 @@ class Funcionario {
     this.TipoFunc,
     this.Telefone,
     this.Telefone2,
-    this.Nome
+    this.Nome,
+    this.CNPJ
   });
 
   factory Funcionario.fromJson(Map<String, dynamic> json) => Funcionario(
@@ -29,7 +37,8 @@ class Funcionario {
     TipoFunc: json["TipoFunc"],
     Telefone: json["Telefone"],
     Telefone2: json["Telefone2"],
-    Nome: json["Nome"]
+    Nome: json["Nome"],
+    CNPJ: json["CNPJ"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +47,7 @@ class Funcionario {
     "TipoFunc": TipoFunc,
     "Telefone": Telefone,
     "Telefone2": Telefone2,
-    "Nome": Nome
+    "Nome": Nome,
+    "CNPJ": CNPJ,
   };
 }
