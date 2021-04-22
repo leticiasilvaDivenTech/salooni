@@ -83,7 +83,7 @@ class _ProdedimentoCadState extends State<ProdedimentoCad> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ProcedimentoEdi()));
+                                            builder: (context) => ProcedimentoEdi(procedimentoId: procedimentoList[index].objectId)));
                                   },
                                   child: ListTile(
                                     leading: Icon(

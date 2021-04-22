@@ -18,6 +18,7 @@ class parceirocadastrados extends StatefulWidget {
 }
 
 class _parceirocadastradosState extends State<parceirocadastrados> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   var maskFormatterCelular = new MaskTextInputFormatter
     (mask: '(##) ####-#####', filter: { "#": RegExp(r'[0-9]') });
   var maskFormatterCNPJ = new MaskTextInputFormatter
@@ -27,6 +28,7 @@ class _parceirocadastradosState extends State<parceirocadastrados> {
   TextEditingController celularController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Funcionario parceiro = new Funcionario();
   String dropdownValue = 'Selecione o procedimento realizado';
   // ignore: unused_element
   void _resetFields(){
@@ -41,15 +43,35 @@ class _parceirocadastradosState extends State<parceirocadastrados> {
 
 
   initState(){
-    carregarParceiros(this.widget.parceiroId);
+    carregarParceiro(this.widget.parceiroId);
   }
 
-  Future<void> carregarParceiros(String parceiroId) async{
-    QueryBuilder<ParseObject> queryParceiro =
-    QueryBuilder<ParseObject>(ParseObject('Usuario'));
-    queryParceiro.includeObject(['IdFuncFK']);
+  void converterParceiro(ParseObject parceiroParseObject) {
+    if (parceiroParseObject == null) {
+      this.parceiro.Telefone = celularController.text ;
+      this.parceiro.CNPJ = cnpjController.text;
+      this.parceiro.Nome = nparceiroController.text;
+    } else {
+      parceiro.objectId = parceiroParseObject.get<ParseObject>('IdFuncFK').get<String>('objectId');
+      parceiro.Telefone2 = parceiroParseObject.get<ParseObject>('IdFuncFK').get<String>('Telefone2');
+      parceiro.TipoFunc = parceiroParseObject.get<ParseObject>('IdFuncFK').get<String>('TipoFunc');
+    }
 
-    final ParseResponse apiResponse = await queryParceiro.query();
+  }
+
+  Future<void> carregarParceiro(String parceiroId) async{
+    _resetFields();
+    QueryBuilder<ParseObject> queryUsuario =
+    QueryBuilder<ParseObject>(ParseObject('User'));
+    queryUsuario.includeObject(['IdFuncFK']);
+
+    QueryBuilder<ParseObject> queryParceiro =
+    QueryBuilder<ParseObject>(ParseObject('Funcionario'));
+    queryParceiro.whereEqualTo('objectId', parceiroId);
+
+    queryUsuario.whereMatchesQuery('IdFuncFK', queryParceiro);
+
+    final ParseResponse apiResponse = await queryUsuario.query();
 
     if (apiResponse.success && apiResponse.results != null) {
       final objParceiro = apiResponse.results.first as ParseObject;
@@ -59,16 +81,47 @@ class _parceirocadastradosState extends State<parceirocadastrados> {
       celularController.text = objParceiro.get<ParseObject>('IdFuncFK').get<String>('Telefone');
       emailController.text = objParceiro.get<String>('Email');
 
+      converterParceiro(objParceiro);
     } else {
 
     }
   }
+
+  void atualizarParceiro() {
+    converterParceiro(null);
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text("Atualizando Parceiro"),
+        CircularProgressIndicator(),
+      ],
+    ),
+      duration: Duration(minutes: 1),
+    ),);
+
+
+    FuncionarioService.atualizarFuncionario(parceiro)
+        .then((res) {
+
+      _scaffoldKey.currentState.hideCurrentSnackBar();
+
+      Response response = res;
+      if (response.statusCode == 200) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: (Text("Atualizado!"))));
+      } else {
+        //Handle error
+      }
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
     double _alturaTela = MediaQuery.of(context).size.height;
     double _LarguraTela = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
         backgroundColor: Color(0xFFededed),
         body: SingleChildScrollView(
           child:Form(
@@ -260,7 +313,9 @@ class _parceirocadastradosState extends State<parceirocadastrados> {
                       child: Container(
                         height: _alturaTela * 0.055,
                         child: RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            atualizarParceiro();
+                          },
                           child: Text(
                             "   Salvar   ",
                             style: TextStyle(

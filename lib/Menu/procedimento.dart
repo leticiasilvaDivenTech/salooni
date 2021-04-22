@@ -1,15 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:salooni/Models/procedimento.dart';
 import 'package:salooni/Registro/parceiros.dart';
+import 'package:salooni/Services/procedimento_service.dart';
 
 import 'cadastroproc.dart';
 
 class ProcedimentoEdi extends StatefulWidget {
+  ProcedimentoEdi({this.procedimentoId});
+  String procedimentoId;
+
   @override
   _ProcedimentoEdiState createState() => _ProcedimentoEdiState();
 }
 
 class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   var maskFormatterHora = new MaskTextInputFormatter(
       mask: '##:##', filter: {"#": RegExp(r'[0-9]')});
   TextEditingController procedimentoController = TextEditingController();
@@ -18,6 +27,62 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _value1 = false;
   bool _valueCheck1 = false;
+
+  initState(){
+    carregarProcedimento(this.widget.procedimentoId);
+  }
+
+  void carregarProcedimento(String procedimentoId) async{
+    Procedimento procedimento = new Procedimento();
+
+    Response response = await ProcedimentoService.carregarProcedimento(procedimentoId);
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+
+
+      procedimento = Procedimento.fromJson(body);
+      print(procedimento);
+
+
+      horaminController.text = procedimento.Tempo.toString();
+      precoController.text = procedimento.Valor.toString();
+      procedimentoController.text = procedimento.Nome;
+    } else {
+        //Handle ERROR
+    }
+  }
+
+  void atualizarProcedimento() {
+    Procedimento procedimento = new Procedimento();
+    procedimento.objectId = this.widget.procedimentoId;
+    procedimento.Nome = procedimentoController.text;
+    procedimento.Tempo = int.parse(horaminController.text);
+    procedimento.Valor = int.parse(precoController.text);
+
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text("Atualizando Procedimento"),
+        CircularProgressIndicator(),
+      ],
+    ),
+      duration: Duration(minutes: 1),
+    ),);
+
+
+    ProcedimentoService.atualizarProcedimento(procedimento)
+        .then((res) {
+
+      _scaffoldKey.currentState.hideCurrentSnackBar();
+
+      Response response = res;
+      if (response.statusCode == 200) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: (Text("Atualizado!"))));
+      } else {
+        //Handle error
+      }
+    });
+  }
 
   // ignore: unused_element
   void _resetFields() {
@@ -40,6 +105,7 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
         .size
         .width;
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Color(0xFFededed),
       body: SingleChildScrollView(
         child: Form(
@@ -269,7 +335,9 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                     child: Container(
                       height: _alturaTela * 0.055,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          atualizarProcedimento();
+                        },
                         child: Text(
                           "   Salvar   ",
                           style: TextStyle(

@@ -33,6 +33,17 @@ class ProcedimentoService {
     return response;
   }
 
+  static Future carregarProcedimento(String objectId) async {
+    String apiUrl = _baseUrl + "Procedimento/$objectId";
+
+    Response response = await get(apiUrl, headers: {
+      'X-Parse-Application-Id': kParseApplicationId,
+      'X-Parse-REST-API-Key': kParseRestApiKey,
+    });
+
+    return response;
+  }
+
 
   static Future atualizarProcedimento(Procedimento procedimento) async {
     String apiUrl = _baseUrl + "Procedimento/${procedimento.objectId}";

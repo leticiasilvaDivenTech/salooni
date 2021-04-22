@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:salooni/Models/procedimento.dart';
 import 'package:salooni/Registro/parceiros.dart';
+import 'package:salooni/Services/procedimento_service.dart';
 
 class cadastroProc extends StatefulWidget {
+
   @override
   _cadastroProcState createState() => _cadastroProcState();
 }
 
 class _cadastroProcState extends State<cadastroProc> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   var maskFormatterHora = new MaskTextInputFormatter(
       mask: '##:##', filter: {"#": RegExp(r'[0-9]')});
   TextEditingController procedimentoController = TextEditingController();
@@ -27,11 +32,43 @@ class _cadastroProcState extends State<cadastroProc> {
     });
   }
 
+  void adicionarProcedimento() {
+    Procedimento procedimento = new Procedimento();
+    procedimento.Nome = procedimentoController.text;
+    procedimento.Tempo = int.parse(horaminController.text);
+    procedimento.Valor = int.parse(precoController.text);
+
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text("Adicionando Procedimento"),
+        CircularProgressIndicator(),
+      ],
+    ),
+      duration: Duration(minutes: 1),
+    ),);
+
+
+    ProcedimentoService.adicionarProcedimento(procedimento)
+        .then((res) {
+
+      _scaffoldKey.currentState.hideCurrentSnackBar();
+
+      Response response = res;
+      if (response.statusCode == 200) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: (Text("Adicionado!"))));
+      } else {
+        //Handle error
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double _alturaTela = MediaQuery.of(context).size.height;
     double _LarguraTela = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Color(0xFFededed),
       body: SingleChildScrollView(
         child: Form(
@@ -234,8 +271,9 @@ class _cadastroProcState extends State<cadastroProc> {
                   height: _alturaTela * 0.055,
                   child: RaisedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Parceiro()));
+                      adicionarProcedimento();
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => Parceiro())); Esse navigator está correto?
                     },
                     child: Text(
                       "Salvar",

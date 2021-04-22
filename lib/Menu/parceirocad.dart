@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:http/http.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:salooni/Models/funcionario.dart';
+import 'package:salooni/Services/funcionario_service.dart';
 
 
 class parceirocad extends StatefulWidget {
@@ -9,6 +12,7 @@ class parceirocad extends StatefulWidget {
 }
 
 class _parceirocadState extends State<parceirocad> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   var maskFormatterCelular = new MaskTextInputFormatter
     (mask: '(##) ####-#####', filter: { "#": RegExp(r'[0-9]') });
   var maskFormatterCNPJ = new MaskTextInputFormatter
@@ -18,6 +22,7 @@ class _parceirocadState extends State<parceirocad> {
   TextEditingController celularController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Funcionario parceiro = new Funcionario();
   String dropdownValue = 'Selecione o procedimento realizado';
   // ignore: unused_element
   void _resetFields(){
@@ -29,11 +34,44 @@ class _parceirocadState extends State<parceirocad> {
       _formKey = GlobalKey<FormState>();
     });
   }
+
+  void adicionarParceiro() {
+    this.parceiro.Telefone = celularController.text ;
+    this.parceiro.CNPJ = cnpjController.text;
+    this.parceiro.Nome = nparceiroController.text;
+    this.parceiro.TipoFunc = 'PRC';
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text("Adicionando Parceiro"),
+        CircularProgressIndicator(),
+      ],
+    ),
+      duration: Duration(minutes: 1),
+    ),);
+
+
+    FuncionarioService.adicionarFuncionario(parceiro)
+        .then((res) {
+
+      _scaffoldKey.currentState.hideCurrentSnackBar();
+
+      Response response = res;
+      if (response.statusCode == 200) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: (Text("Adicionado!"))));
+
+      } else {
+        //Handle error
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double _alturaTela = MediaQuery.of(context).size.height;
     double _LarguraTela = MediaQuery.of(context).size.width;
     return Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Color(0xFFededed),
         body: SingleChildScrollView(
           child:Form(
@@ -205,7 +243,7 @@ class _parceirocadState extends State<parceirocad> {
                     height: _alturaTela * 0.055,
                     child: RaisedButton(
                       onPressed: () {
-
+                        adicionarParceiro();
                       },
                       child: Text(
                         "Adicionar",
