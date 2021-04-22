@@ -11,19 +11,58 @@ class LoginUser extends StatefulWidget {
 }
 
 class _LoginUserState extends State<LoginUser> {
-  TextEditingController loginController = TextEditingController();
+  TextEditingController usuarioController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   // ignore: unused_element
-  void _resetFields(){
-    loginController.text = "";
+  void _resetFields() {
+    usuarioController.text = "";
     senhaController.text = "";
     setState(() {
       _formKey = GlobalKey<FormState>();
     });
   }
-  @override
 
+  @override
+  void showFailAlert() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: new Text("Atenção"),
+          content: new Text("Usuário ou senha incorretos"),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            new FlatButton(
+              child: new Text("Fechar"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void doLogin() async {
+    final username = usuarioController.text.trim();
+    final password = senhaController.text.trim();
+
+    final user = ParseUser(username, password, null);
+
+    var response = await user.login();
+
+    if (response.success) {
+      // _formKey.currentState.validate()
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MenuLateral()));
+    } else {
+      showFailAlert();
+    }
+  }
 
   Widget build(BuildContext context) {
     double _alturaTela = MediaQuery.of(context).size.height;
@@ -50,19 +89,19 @@ class _LoginUserState extends State<LoginUser> {
                   padding: EdgeInsets.fromLTRB(_LarguraTela * 0.12, 0,
                       _LarguraTela * 0.12, _alturaTela * 0.02),
                   child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.emailAddress,
-                    cursorColor: Color(0xFF9977ae),
-                    decoration: InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF9977ae))),
-                        hintText: "Login",
-                        hintStyle: TextStyle(color: Color(0xFF9977ae)),
-                        labelStyle: TextStyle(color: Color(0xFF9977ae))),
-                    controller: loginController,
-                    style: TextStyle(
-                        color: Color(0xFF0f0f0f),
-                        fontSize: _LarguraTela * 0.04),
+                      autofocus: false,
+                      keyboardType: TextInputType.emailAddress,
+                      cursorColor: Color(0xFF9977ae),
+                      decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF9977ae))),
+                          hintText: "Login",
+                          hintStyle: TextStyle(color: Color(0xFF9977ae)),
+                          labelStyle: TextStyle(color: Color(0xFF9977ae))),
+                      controller: usuarioController,
+                      style: TextStyle(
+                          color: Color(0xFF0f0f0f),
+                          fontSize: _LarguraTela * 0.04),
                       validator:
                           EmailValidator(errorText: 'Inserir e-mail válido')),
                 ),
@@ -118,16 +157,8 @@ class _LoginUserState extends State<LoginUser> {
                     height: _alturaTela * 0.055,
                     child: RaisedButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MenuLateral()));
-                        }
-                        else
-                          return null;
+                        doLogin();
                       },
-
                       child: Text(
                         "Entrar",
                         style: TextStyle(

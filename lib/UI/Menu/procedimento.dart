@@ -1,15 +1,22 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:salooni/UI/Registro/parceiros.dart';
 
 import 'cadastroproc.dart';
 
 class ProcedimentoEdi extends StatefulWidget {
+  ProcedimentoEdi({this.procedimentoId});
+  String procedimentoId;
+
   @override
   _ProcedimentoEdiState createState() => _ProcedimentoEdiState();
 }
 
 class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   var maskFormatterHora = new MaskTextInputFormatter(
       mask: '##:##', filter: {"#": RegExp(r'[0-9]')});
   TextEditingController procedimentoController = TextEditingController();
@@ -18,6 +25,62 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _value1 = false;
   bool _valueCheck1 = false;
+
+  initState() {
+    carregarProcedimento(this.widget.procedimentoId);
+  }
+
+  void carregarProcedimento(String procedimentoId) async {
+    Procedimento procedimento = new Procedimento();
+
+    Response response =
+        await ProcedimentoService.carregarProcedimento(procedimentoId);
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+
+      procedimento = Procedimento.fromJson(body);
+      print(procedimento);
+
+      horaminController.text = procedimento.Tempo.toString();
+      precoController.text = procedimento.Valor.toString();
+      procedimentoController.text = procedimento.Nome;
+    } else {
+      //Handle ERROR
+    }
+  }
+
+  void atualizarProcedimento() {
+    Procedimento procedimento = new Procedimento();
+    procedimento.objectId = this.widget.procedimentoId;
+    procedimento.Nome = procedimentoController.text;
+    procedimento.Tempo = int.parse(horaminController.text);
+    procedimento.Valor = int.parse(precoController.text);
+
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text("Atualizando Procedimento"),
+            CircularProgressIndicator(),
+          ],
+        ),
+        duration: Duration(minutes: 1),
+      ),
+    );
+
+    ProcedimentoService.atualizarProcedimento(procedimento).then((res) {
+      _scaffoldKey.currentState.hideCurrentSnackBar();
+
+      Response response = res;
+      if (response.statusCode == 200) {
+        _scaffoldKey.currentState
+            .showSnackBar(SnackBar(content: (Text("Atualizado!"))));
+      } else {
+        //Handle error
+      }
+    });
+  }
 
   // ignore: unused_element
   void _resetFields() {
@@ -31,15 +94,10 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
 
   @override
   Widget build(BuildContext context) {
-    double _alturaTela = MediaQuery
-        .of(context)
-        .size
-        .height;
-    double _LarguraTela = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double _alturaTela = MediaQuery.of(context).size.height;
+    double _LarguraTela = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Color(0xFFededed),
       body: SingleChildScrollView(
         child: Form(
@@ -76,7 +134,6 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                   ),
                 ),
               ]),
-
               Padding(
                 padding: EdgeInsets.fromLTRB(_LarguraTela * 0.09,
                     _alturaTela * 0.03, _LarguraTela * 0.09, 0),
@@ -148,7 +205,6 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                         return null;
                     }),
               ),
-
               Column(mainAxisAlignment: MainAxisAlignment.center, children: <
                   Widget>[
                 Padding(
@@ -170,41 +226,35 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                             _value1 = value;
                           });
                         })),
-                new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding:
-                        EdgeInsets.fromLTRB(_LarguraTela * 0.05, 0, 0, 0),
-                        child: new Radio(
-                          value: 1,
-                          groupValue: null,
-                          onChanged: null,
-                        ),
-                      ),
-                      Expanded(
-                          child: Padding(
-                            padding:
-                            EdgeInsets.fromLTRB(0, 0, _LarguraTela * 0.5, 0),
-                            child: TextField(
-                              autofocus: false,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide:
-                                      BorderSide(color: Color(0xFF9977ae))),
-                                  hintText: "% (Porcentagem)",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9977ae)),
-                                  labelStyle:
-                                  TextStyle(color: Color(0xFF9977ae))),
-                              style: TextStyle(
-                                  color: Color(0xFF0f0f0f),
-                                  fontSize: _LarguraTela * 0.04),
-                              // controller: precoController,
-                            ),
-                          )),
-                    ]),
+                new Row(mainAxisAlignment: MainAxisAlignment.center, children: <
+                    Widget>[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(_LarguraTela * 0.05, 0, 0, 0),
+                    child: new Radio(
+                      value: 1,
+                      groupValue: null,
+                      onChanged: null,
+                    ),
+                  ),
+                  Expanded(
+                      child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, _LarguraTela * 0.5, 0),
+                    child: TextField(
+                      autofocus: false,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF9977ae))),
+                          hintText: "% (Porcentagem)",
+                          hintStyle: TextStyle(color: Color(0xFF9977ae)),
+                          labelStyle: TextStyle(color: Color(0xFF9977ae))),
+                      style: TextStyle(
+                          color: Color(0xFF0f0f0f),
+                          fontSize: _LarguraTela * 0.04),
+                      // controller: precoController,
+                    ),
+                  )),
+                ]),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -219,26 +269,24 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                       ),
                       Expanded(
                           child: Padding(
-                            padding:
+                        padding:
                             EdgeInsets.fromLTRB(0, 0, _LarguraTela * 0.5, 0),
-                            child: TextField(
-                              autofocus: false,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide:
+                        child: TextField(
+                          autofocus: false,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
                                       BorderSide(color: Color(0xFF9977ae))),
-                                  hintText: "R\$ (Valor fixo)",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9977ae)),
-                                  labelStyle:
-                                  TextStyle(color: Color(0xFF9977ae))),
-                              style: TextStyle(
-                                  color: Color(0xFF0f0f0f),
-                                  fontSize: _LarguraTela * 0.04),
-                              //controller: precoController,
-                            ),
-                          )),
+                              hintText: "R\$ (Valor fixo)",
+                              hintStyle: TextStyle(color: Color(0xFF9977ae)),
+                              labelStyle: TextStyle(color: Color(0xFF9977ae))),
+                          style: TextStyle(
+                              color: Color(0xFF0f0f0f),
+                              fontSize: _LarguraTela * 0.04),
+                          //controller: precoController,
+                        ),
+                      )),
                     ]),
               ]),
               Row(
@@ -269,7 +317,9 @@ class _ProcedimentoEdiState extends State<ProcedimentoEdi> {
                     child: Container(
                       height: _alturaTela * 0.055,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          atualizarProcedimento();
+                        },
                         child: Text(
                           "   Salvar   ",
                           style: TextStyle(
