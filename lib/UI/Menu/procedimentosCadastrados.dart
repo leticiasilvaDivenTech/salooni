@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:salooni/UI/Menu/procedimento.dart';
+import 'package:salooni/Menu/procedimento.dart';
 import 'package:salooni/Models/procedimento.dart';
 import 'package:salooni/Services/procedimento_service.dart';
 
@@ -83,7 +83,7 @@ class _ProdedimentoCadState extends State<ProdedimentoCad> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ProcedimentoEdi()));
+                                            builder: (context) => ProcedimentoEdi(procedimentoId: procedimentoList[index].objectId)));
                                   },
                                   child: ListTile(
                                     leading: Icon(
