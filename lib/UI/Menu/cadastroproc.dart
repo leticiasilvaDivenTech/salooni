@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:salooni/Models/procedimento.dart';
+import 'package:salooni/Services/procedimento_service.dart';
 import 'package:salooni/UI//Registro/parceiros.dart';
 
 class cadastroProc extends StatefulWidget {

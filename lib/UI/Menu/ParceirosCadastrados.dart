@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -10,6 +9,7 @@ import 'package:salooni/Services/funcionario_service.dart';
 
 class parceirocadastrados extends StatefulWidget {
   parceirocadastrados({this.parceiroId});
+
   String parceiroId;
 
   @override
@@ -29,6 +29,7 @@ class _parceirocadastradosState extends State<parceirocadastrados> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Funcionario parceiro = new Funcionario();
   String dropdownValue = 'Selecione o procedimento realizado';
+
   // ignore: unused_element
   void _resetFields() {
     nparceiroController.text = "";
@@ -88,6 +89,34 @@ class _parceirocadastradosState extends State<parceirocadastrados> {
       emailController.text = objParceiro.get<String>('Email');
     } else {}
   }
+
+  void atualizarParceiro() {
+    converterParceiro(null);
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text("Atualizando Parceiro"),
+        CircularProgressIndicator(),
+      ],
+    ),
+      duration: Duration(minutes: 1),
+    ),);
+
+
+    FuncionarioService.atualizarFuncionario(parceiro)
+        .then((res) {
+
+      _scaffoldKey.currentState.hideCurrentSnackBar();
+
+      Response response = res;
+      if (response.statusCode == 200) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: (Text("Atualizado!"))));
+      } else {
+        //Handle error
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:salooni/UI/Menu/menuLateral.dart';
 import 'package:salooni/UI/Menu/navbar.dart';
 import 'package:salooni/UI/Registro/registrar.dart';
