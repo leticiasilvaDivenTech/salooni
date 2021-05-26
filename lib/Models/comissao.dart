@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'cliente.dart';
 import 'procedimento.dart';
 import 'funcionario.dart';

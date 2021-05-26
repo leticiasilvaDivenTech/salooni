@@ -19,7 +19,7 @@ class MenuLateral extends StatefulWidget {
 class _MenuLateralState extends State<MenuLateral> {
   double value = 0;
   Widget _showPage = new Menu();
-
+  //Widget _showPage = new Menu();
   @override
   Widget build(BuildContext context) {
     double _alturaTela = MediaQuery.of(context).size.height;

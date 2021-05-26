@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:salooni/UI/Agendamento/detalhe.dart';
 import 'package:salooni/UI/Menu/parceirocad.dart';
 import 'package:salooni/Models/funcionario.dart';
 import 'package:salooni/Services/funcionario_service.dart';

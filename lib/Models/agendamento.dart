@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'cliente.dart';
 import 'procedimento.dart';
 import 'funcionario.dart';
@@ -10,37 +9,40 @@ String agendamentoToJson(List<Agendamento> data) => json.encode(List<dynamic>.fr
 
 class Agendamento {
   String objectId;
-  Cliente IdClienteFK;
-  Funcionario IdFuncFK;
-  Procedimento IdProcFK;
+  Cliente ClienteFK;
+  Funcionario FuncFK;
+  Procedimento ProcFK;
   String Observacao;
-  DateTime DataAgendamento;
-
+  String DataAgendamento;
+  String Hora;
 
   Agendamento({
     this.objectId,
-    this.IdClienteFK,
-    this.IdFuncFK,
-    this.IdProcFK,
+    this.ClienteFK,
+    this.FuncFK,
+    this.ProcFK,
     this.Observacao,
-    this.DataAgendamento
+    this.DataAgendamento,
+    this.Hora
   });
 
   factory Agendamento.fromJson(Map<String, dynamic> json) => Agendamento(
     objectId: json["objectId"],
-    IdClienteFK: json["IdClienteFK"],
-      IdFuncFK: json["IdFuncFK"],
-    IdProcFK: json["IdProcFK"],
+    ClienteFK: json["IdClienteFK"],
+      FuncFK: json["IdFuncFK"],
+    ProcFK: json["IdProcFK"],
     Observacao: json["Observacao"],
-    DataAgendamento: json["DataAgendamento"]
+    DataAgendamento: json["DataAgendamento"],
+      Hora: json["Hora"]
   );
 
   Map<String, dynamic> toJson() => {
     "objectId": objectId,
-    "IdClienteFK": IdClienteFK,
-    "IdFuncFK": IdFuncFK,
-    "IdProcFK": IdProcFK,
+    "IdClienteFK": ClienteFK,
+    "IdFuncFK": FuncFK,
+    "IdProcFK": ProcFK,
     "Observacao": Observacao,
-    "DataAgendamento": DataAgendamento
+    "DataAgendamento": DataAgendamento,
+    "Hora": Hora
   };
 }

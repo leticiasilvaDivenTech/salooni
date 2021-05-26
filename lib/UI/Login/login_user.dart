@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:salooni/UI/Menu/menuLateral.dart';
-import 'package:salooni/UI/Menu/navbar.dart';
 import 'package:salooni/UI/Registro/registrar.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'esqueceu_senha.dart';
@@ -14,7 +13,6 @@ class _LoginUserState extends State<LoginUser> {
   TextEditingController loginController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  // ignore: unused_element
   void _resetFields(){
     loginController.text = "";
     senhaController.text = "";

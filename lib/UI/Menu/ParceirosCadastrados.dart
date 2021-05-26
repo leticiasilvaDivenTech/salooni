@@ -2,11 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:http/http.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
-import 'package:salooni/Models/funcionario.dart';
-import 'package:salooni/Services/funcionario_service.dart';
 
 
 class parceirocadastrados extends StatefulWidget {
